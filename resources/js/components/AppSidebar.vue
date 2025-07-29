@@ -16,8 +16,13 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Menu Items',
-        href: '/menu-items',
+        href: '/admin/menu-items',
         icon: Folder,
+    },
+    {
+        title: 'Menu Management',
+        href: '/admin/menu-management',
+        icon: LayoutGrid,
     },
 ];
 

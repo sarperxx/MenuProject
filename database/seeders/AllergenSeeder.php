@@ -18,11 +18,18 @@ class AllergenSeeder extends Seeder
             'Soy',
         ];
 
+        $allergenIds = [];
         foreach ($allergens as $name) {
-            Allergen::create(['name' => $name]);
+            $allergen = Allergen::firstOrCreate(['name' => $name]);
+            $allergenIds[] = $allergen->id;
         }
 
-        // Örnek ilişkilendirme: bazı yemeklere alerjen bağlayalım
-      
+        // Randomly assign allergens to menu items
+        $menuItems = MenuItem::all();
+        foreach ($menuItems as $item) {
+            // Assign 0-3 random allergens to each item
+            $randomAllergens = collect($allergenIds)->shuffle()->take(rand(0, 3))->all();
+            $item->allergens()->sync($randomAllergens);
+        }
     }
 }

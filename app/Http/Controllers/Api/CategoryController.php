@@ -13,7 +13,14 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return response()->json(Category::all());
+        $categories = \App\Models\Category::with('menus')->get();
+        $categories = $categories->map(function ($cat) {
+            $catArr = $cat->toArray();
+            $catArr['menu_ids'] = $cat->menus->pluck('id')->toArray();
+            unset($catArr['menus']);
+            return $catArr;
+        });
+        return response()->json($categories);
     }
 
     /**

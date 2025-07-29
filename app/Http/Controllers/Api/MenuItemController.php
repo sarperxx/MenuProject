@@ -71,7 +71,7 @@ if ($excludedAllergens = $request->query('excluded_allergens')) {
 
         $item = MenuItem::create($validated);
         $item->allergens()->sync($validated['allergens'] ?? []);
-        return response()->json($item->load('category'), Response::HTTP_CREATED);
+        return redirect()->route('admin.menu-items')->with('success', 'Menu item created.');
     }
 
     /**
@@ -112,7 +112,7 @@ if ($excludedAllergens = $request->query('excluded_allergens')) {
         }
 
         $item->update($validated);
-        return response()->json($item);
+        return redirect()->route('admin.menu-items')->with('success', 'Menu item updated.');
     }
 
     /**
