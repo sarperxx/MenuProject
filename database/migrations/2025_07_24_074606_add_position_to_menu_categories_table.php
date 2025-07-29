@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('menu_categories', function (Blueprint $table) {
-            $table->integer('position')->default(0)->after('name');
+            $table->integer('position')->default(0);
         });
     }
 

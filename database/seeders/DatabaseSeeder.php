@@ -17,8 +17,17 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Test User',
-            'email' => 'test@example.com',
+            'email' => 'test_user@example.com',
             'is_admin' => true,
+        ]);
+
+        // Run all the menu-related seeders
+        $this->call([
+            MenuSeeder::class,
+            MenuCategorySeeder::class,
+            MenuItemSeeder::class,
+            AllergenSeeder::class,
+            CategoryMenuSeeder::class,
         ]);
     }
 }
